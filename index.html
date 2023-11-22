@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Video Editor Application</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+<body>
+    <h1>Video Editor Application</h1>
+    <p>You can apply to be a video editor by filling out the form below:</p>
+
+    <form id="applicationForm">
+        <label for="discordUsername">Your Discord Username*</label>
+        <input type="text" id="discordUsername" name="discordUsername" required><br><br>
+
+<label for="age">Your Age*</label>
+<input type="number" id="age" name="age" required max="100"><br><br>
+
+        <label for="experiences">Your Experiences*</label>
+        <textarea id="experiences" name="experiences" rows="4" required></textarea><br><br>
+
+        <label for="additionalInfo">Additional Information</label>
+        <textarea id="additionalInfo" name="additionalInfo" rows="4"></textarea><br><br>
+
+        <input type="submit" value="Submit Application" id="submitBtn">
+    </form>
+
+    <script>
+        const applicationForm = document.getElementById("applicationForm");
+        const submitBtn = document.getElementById("submitBtn");
+
+        let isSubmitting = false;
+
+        applicationForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            if (isSubmitting) {
+                return;
+            }
+
+            isSubmitting = true;
+            submitBtn.disabled = true; // Disable the button
+
+            const discordUsername = document.getElementById("discordUsername").value;
+            const age = document.getElementById("age").value;
+            const experiences = document.getElementById("experiences").value;
+            const additionalInfo = document.getElementById("additionalInfo").value;
+
+            // Replace with your Discord webhook URL
+            const webhookUrl = "https://discord.com/api/webhooks/1176927728931451032/1WCZ9U52VOaiKlHOwrSr_WEDMQeLQIlQ7R8QbFVD_NwQ3w4FFVEb8BEoRxXf4CF0bGSF";
+
+            const data = {
+                embeds: [{
+                    title: "New Video Editor Application",
+                    color: 0xFF0000, // Red color
+                    fields: [{
+                            name: "Discord Username",
+                            value: discordUsername,
+                            inline: true
+                        },
+                        {
+                            name: "Age",
+                            value: age,
+                            inline: true
+                        },
+                        {
+                            name: "Experiences",
+                            value: experiences
+                        },
+                        {
+                            name: "Additional Information",
+                            value: additionalInfo || "N/A"
+                        }
+                    ]
+                }]
+            };
+
+            fetch(webhookUrl, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => {
+                    if (response.ok) {
+                        alert("Application submitted successfully!");
+                        applicationForm.reset();
+                    } else {
+                        alert("Error submitting application.");
+                    }
+                })
+                .catch(error => {
+                    alert("Error submitting application: " + error);
+                })
+                .finally(() => {
+                    submitBtn.disabled = false; // Re-enable the button
+                    isSubmitting = false;
+                });
+        });
+    </script>
+</body>
+
+</html>
