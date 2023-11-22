@@ -11,17 +11,17 @@
     <p>You can apply to be a video editor by filling out the form below:</p>
 
     <form id="applicationForm">
-        <label for="discordUsername">Your Discord Username*</label>
-        <input type="text" id="discordUsername" name="discordUsername" required><br><br>
+        <label for="discordUsername">Your Discord Username* (max 30 characters)</label>
+        <input type="text" id="discordUsername" name="discordUsername" required maxlength="30"><br><br>
 
-<label for="age">Your Age*</label>
-<input type="number" id="age" name="age" required max="100"><br><br>
+        <label for="age">Your Age*</label>
+        <input type="number" id="age" name="age" required max="100"><br><br>
 
-        <label for="experiences">Your Experiences*</label>
-        <textarea id="experiences" name="experiences" rows="4" required></textarea><br><br>
+        <label for="experiences">Your Experiences* (max 500 characters)</label>
+        <textarea id="experiences" name="experiences" rows="4" required maxlength="500"></textarea><br><br>
 
-        <label for="additionalInfo">Additional Information</label>
-        <textarea id="additionalInfo" name="additionalInfo" rows="4"></textarea><br><br>
+        <label for="additionalInfo">Additional Information (max 500 characters)</label>
+        <textarea id="additionalInfo" name="additionalInfo" rows="4" maxlength="500"></textarea><br><br>
 
         <input type="submit" value="Submit Application" id="submitBtn">
     </form>
